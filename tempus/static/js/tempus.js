@@ -8,7 +8,7 @@ tempus.prototype = {
     start: function() {
         this.startTime = new Date();
         this.boundRender = this.render.bind(this);
-        window.requestAnimationFrame(this.boundRender);
+        window.requestAnimFrame(this.boundRender);
     },
     render: function(timestamp) {
         var dt = new Date();
