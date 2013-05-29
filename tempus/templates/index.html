@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <style>
+        body {
+            background-color: {{ bg }};
+        }
+
+        .time, .start, .stop {
+            color: {{ fore }};
+        }
+    </style>
+{% endblock %}
+
+{% block container %}
+    <div class="time"></div>
+    <a href="#" class="start">[start]</a>
+    <a href="#" class="stop">[stop]</a>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var timer = new tempus($('.time'), {{ seconds }});
+    var start = $('.start');
+    var stop = $('.stop');
+
+    start.bind('click', function(ev) {
+        ev.preventDefault();
+        timer.start();
+
+        stop.hide();
+        start.show();
+    });
+
+    stop.bind('click', function(ev) {
+        ev.preventDefault();
+        timer.reset();
+
+        stop.hide();
+        start.show();
+    });
+
+</script>
+{% endblock %}
