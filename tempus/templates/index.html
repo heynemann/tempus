@@ -20,24 +20,24 @@
 
 {% block scripts %}
 <script>
-    var timer = new tempus($('.time'), {{ seconds }});
     var start = $('.start');
     var stop = $('.stop');
-
+    var timer = new tempus($('.time'), {{ seconds }}, function(time) {
+        stop.hide();
+        start.show();
+    });
+ 
     start.bind('click', function(ev) {
         ev.preventDefault();
         timer.start();
 
-        stop.hide();
-        start.show();
+        start.hide();
+        stop.show();
     });
 
     stop.bind('click', function(ev) {
         ev.preventDefault();
         timer.reset();
-
-        stop.hide();
-        start.show();
     });
 
 </script>

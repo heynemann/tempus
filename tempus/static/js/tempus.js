@@ -1,7 +1,8 @@
-var tempus = function(element, time) {
+var tempus = function(element, time, onStop) {
     this.element = element;
     this.time = time;
     this.startTime = null;
+    this.onStop = onStop;
 };
 
 tempus.prototype = {
@@ -22,10 +23,21 @@ tempus.prototype = {
         if (count > 0) {
             window.requestAnimFrame(this.boundRender);
         } else {
+            if (this.onStop) {
+                this.onStop(count);
+            }
             this.reset();
         }
     },
     reset: function() {
+        if (this.onStop) {
+            var dt = new Date();
+            var diff = (dt - this.startTime) / 1000;
+            var count = Math.ceil(this.time - diff);
+
+            this.onStop(count);
+        }
+
         this.startTime = null;
         this.element.html('YAY!');
     }
