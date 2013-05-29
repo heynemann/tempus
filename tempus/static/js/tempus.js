@@ -20,7 +20,7 @@ tempus.prototype = {
         this.element.html(count);
 
         if (count > 0) {
-            window.requestAnimationFrame(this.boundRender);
+            window.requestAnimFrame(this.boundRender);
         } else {
             this.reset();
         }
